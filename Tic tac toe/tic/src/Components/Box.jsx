@@ -1,19 +1,12 @@
-export default function Box({ num, gameArrayForO, gameArrayForX }) {
-	function onChangeHandler(e) {
-		if (e.target.value === "X") {
-			gameArrayForX(num);
-		} else {
-			gameArrayForO(num);
-		}
-	}
+export default function Box({ num, board, next, onChangeHandler }) {
 	return (
 		<>
 			<input
+				value={board[num]}
 				onKeyDown={(e) => {
-					if (e.key !== "X" && e.key !== "O" && e.key !== "Backspace")
-						e.preventDefault();
+					if (e.key !== next) e.preventDefault();
 				}}
-				onChange={onChangeHandler}
+				onChange={(e) => onChangeHandler(e, num)}
 				className="w-24 h-24 border-2 border-black text-4xl text-center font-bold outline-none"
 				maxLength={1}
 			/>
